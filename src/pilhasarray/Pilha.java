@@ -1,4 +1,4 @@
-package pilhas;
+package pilhasarray;
 
 /**
  *

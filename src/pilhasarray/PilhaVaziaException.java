@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pilhas;
+package pilhasarray;
 
 /**
  *
  * @author ric_l
  */
-public class PilhaCheiaException extends RuntimeException{
+public class PilhaVaziaException extends RuntimeException{
 
-    public PilhaCheiaException() {
-        super("Pilha está cheia coleguinha");
+    public PilhaVaziaException() {
+        super("A pilha esta vazia coleguinha");
     }
     
 }
