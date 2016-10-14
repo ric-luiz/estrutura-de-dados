@@ -7,12 +7,9 @@ package filaLinkedList;
 public class Node {
     private int numero;
     private Node nodeProx;
-    private Node nodeAnt;
 
-    public Node(int numero, Node nodeProx, Node nodeAnt) {
-        this.numero = numero;
-        this.nodeProx = nodeProx;
-        this.nodeAnt = nodeAnt;
+    public Node(Node nodeProx) {        
+        this.nodeProx = nodeProx;        
     }
 
     public int getNumero() {
@@ -30,13 +27,5 @@ public class Node {
     public void setNodeProx(Node nodeProx) {
         this.nodeProx = nodeProx;
     }
-
-    public Node getNodeAnt() {
-        return nodeAnt;
-    }
-
-    public void setNodeAnt(Node nodeAnt) {
-        this.nodeAnt = nodeAnt;
-    }
-        
+    
 }
