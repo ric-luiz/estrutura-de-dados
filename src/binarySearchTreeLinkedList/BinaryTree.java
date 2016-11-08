@@ -133,6 +133,9 @@ public class BinaryTree {
         return atual;
     }
     
+    public void replace(Node nodeAnt,int novoNumero){
+        nodeAnt.setNumero(novoNumero);
+    }            
     //Visita primeiro as raizes da arvore
     public void pre_order_travesia(Node root){
         if(root != null){
