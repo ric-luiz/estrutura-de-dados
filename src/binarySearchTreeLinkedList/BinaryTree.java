@@ -51,9 +51,70 @@ public class BinaryTree {
         }
     }
     
+    public void remove(Node node){
+        if(node == null){ //caso não exista na arvore
+            System.out.println("Nó não existe na arvore");
+        }else if(isExternal(node)){ //caso seja uma folha                                  
+            if(!isRoot(node)){ //SOmente se a folha nao for a raiz
+                Node pai = node.getFather();
+                if(pai.getNumero() > node.getNumero()){
+                    pai.setLeftChild(null);
+                } else {
+                    pai.setRightChild(null);
+                }
+            }
+            node = null;
+        } else if(node.getLeftChild() != null ^ node.getRightChild() != null){
+            if(node.getRightChild() != null){ //Verifica se existe filho na direita de node
+                //Verifica se node está na direita ou esquerda do seu pai
+                if(node.equals(node.getFather().getRightChild())){
+                    node.getFather().setRightChild(node.getRightChild()); //caso esteja na direita
+                    node.getRightChild().setFather(node.getFather());
+                    node = null;
+                } else {
+                    node.getFather().setLeftChild(node.getRightChild()); //caso esteja na esquerda
+                    node.getRightChild().setFather(node.getFather());
+                    node = null;
+                }
+                
+            } else { //O node esta na esquerda de seu pai
+                //Verifica se node está na direita ou esquerda do seu pai
+                if(node.equals(node.getFather().getRightChild())){
+                    node.getFather().setRightChild(node.getLeftChild()); //caso esteja na direita
+                    node.getLeftChild().setFather(node.getFather());
+                    node = null;
+                } else {
+                    node.getFather().setLeftChild(node.getLeftChild()); //caso esteja na esquerda
+                    node.getLeftChild().setFather(node.getFather());
+                    node = null;
+                }
+                
+            }
+        } else { //Caso o node cotenha 2 filhos
+            Node filho = node.getLeftChild();            
+            while(filho.getRightChild() != null){ //andamos ate chegar à um nó folha ou sem filhos a direita                
+                filho = filho.getRightChild();
+            }
+            
+            //caso ainda tenha filhos a esquerda
+            if(filho.getLeftChild() != null){
+                filho.getLeftChild().setFather(filho.getFather()); //Aponta do neto para o avo
+                
+                if(filho.getFather().getNumero() > filho.getLeftChild().getNumero()){
+                    filho.getFather().setLeftChild(filho.getLeftChild());
+                } else {
+                    filho.getFather().setRightChild(filho.getLeftChild());
+                }
+            }
+            
+            //inserir a nova raiz da arvore ou subarvore
+            node.setNumero(filho.getNumero());
+            filho = null;
+        }
+    }
+    
     public Node search(int numero){
-        Node atual = root;
-        System.out.println("Iniciando a visitação aos elementos...");
+        Node atual = root;        
         
         while(atual.getNumero() != numero){
             //ir para esquerda
